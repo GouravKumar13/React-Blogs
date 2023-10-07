@@ -46,6 +46,7 @@ export class AuthService {
             return await this.account.get()
         } catch (error) {
             throw error
+
         }
 
         return null;
@@ -63,4 +64,4 @@ export class AuthService {
 
 const authService = new AuthService
 
-export default new authService
+export default authService
