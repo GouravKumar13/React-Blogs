@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useDispatch } from "react-redux"
 import authService from "./appWrite/auth"
-import { logOut, login } from "./store/authSlice"
+import { logout, login } from "./store/authSlice"
 import Layout from "./Layout/Layout"
 
 function App () {
@@ -15,7 +15,7 @@ function App () {
           dispatch(login(userData))
         }
         else {
-          dispatch(logOut())
+          dispatch(logout())
         }
       })
       .finally(() => { setLoading(false) })
