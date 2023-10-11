@@ -44,10 +44,11 @@ function Header () {
     ]
     return (
 
-        <nav className='flex items-center justify-between  my-1 h-12    w-full'>
+        <nav className=' flex items-center justify-between  my-1 h-12    w-full'>
             <div>
-
-                <h1 className='cursor-pointer font-bold  text-3xl'>SPEECH</h1>
+                <Link to="/">
+                    <h1 className='cursor-pointer font-bold  text-3xl'>SPEECH</h1>
+                </Link>
 
             </div>
             <div className='w-[40%] flex'>
@@ -64,7 +65,9 @@ function Header () {
                         (
                             navItem.active ? (
                                 //add link after configuring browser router
-                                <li className='cursor-pointer'><p>{ navItem.name }</p></li>
+                                <Link to={ navItem.URL } key={ navItem.name }>
+                                    <li className='cursor-pointer'><p>{ navItem.name }</p></li>
+                                </Link>
                             ) : null
 
                         )
