@@ -44,7 +44,7 @@ function Header () {
     ]
     return (
 
-        <nav className='flex items-center justify-between  my-1 h-12   mx-10 w-full'>
+        <nav className='flex items-center justify-between  my-1 h-12    w-full'>
             <div>
 
                 <h1 className='cursor-pointer font-bold  text-3xl'>SPEECH</h1>
@@ -57,20 +57,25 @@ function Header () {
                 </svg>
 
             </div>
-            <ul className='flex  gap-[30%] justify-end items-center font-semibold ' >
-                {
-                    navItems.map((navItem) => {
-                        return (
+            <div className='flex justify-between w-[25%]'>
+                <ul className='flex w-full   justify-around items-center font-semibold ' >
+                    {
+                        navItems.map((navItem) =>
+                        (
                             navItem.active ? (
                                 //add link after configuring browser router
-                                <li className='cursor-pointer'>{ navItem.name }</li>
+                                <li className='cursor-pointer'><p>{ navItem.name }</p></li>
                             ) : null
 
                         )
-                    })
+                        )
+                    }
+                </ul>
+                { authStatus && (
+                    <LogoutBtn />
+                )
                 }
-            </ul>
-
+            </div>
         </nav>
 
     )
