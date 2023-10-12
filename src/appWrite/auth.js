@@ -16,10 +16,10 @@ export class AuthService {
         this.account = new Account(this.client);
     }
 
-    async createAccount ({ userName, email, password }) {
+    async createAccount ({ name, email, password }) {
 
         try {
-            const userAccount = await this.account.create(ID.unique(), userName, email, password);
+            const userAccount = await this.account.create(ID.unique(), email, password, name,);
             if (userAccount) {
                 //call another method
                 return this.login({ email, password })
@@ -29,6 +29,7 @@ export class AuthService {
             }
         }
         catch (error) {
+            console.error("Error creating account:", error);
             throw error
         }
     }

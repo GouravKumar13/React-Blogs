@@ -30,7 +30,7 @@ const Signup = () => {
 
                 try {
                     const session = await authService.createAccount(values)
-                    console.log(session)
+
                     if (session) {
                         const userData = await authService.getCurrentUser()
                         if (userData) dispatch(login(userData))
@@ -39,9 +39,10 @@ const Signup = () => {
 
                 } catch (error) {
                     console.log(error)
-
+                    action.resetForm()
 
                 }
+                action.resetForm()
             },
         });
 
@@ -141,7 +142,7 @@ focus-within:border-[#8c7569]
 
             </form>
             <p className="text-slate-500 mt-3">
-                Already have an account? <Link href="/login" className=' text-blue-500 cursor-pointer'>Log In</Link>
+                Already have an account? <Link to="/login" className=' text-blue-500 cursor-pointer'>Log In</Link>
             </p>
         </div>
 

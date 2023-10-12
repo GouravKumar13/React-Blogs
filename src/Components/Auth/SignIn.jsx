@@ -28,6 +28,7 @@ const SignIn = () => {
         onSubmit: async (values, action) => {
             try {
                 const session = await authService.login(values)
+                console.log(session)
                 if (session) {
                     // agar user hai to uska data le liya or store mai login call kar diya or navigate kar diya "/" pe
                     const userData = await authService.getCurrentUser
