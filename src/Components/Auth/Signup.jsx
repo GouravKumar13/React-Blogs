@@ -78,7 +78,7 @@ focus-within:border-[#8c7569]
                         onBlur={ handleBlur }
                     />
                     { touched.name && errors.name ? (
-                        <p className="text-[11px] text-blue-500 pl-[4px]">{ errors.name }</p>
+                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.name }</p>
                     ) : null }
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s]
@@ -96,7 +96,7 @@ focus-within:border-[#8c7569]
                         onBlur={ handleBlur }
                     />
                     { errors.email && touched.email ? (
-                        <p className="text-[11px] text-blue-500 pl-[4px]">{ errors.email }</p>
+                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.email }</p>
                     ) : null }
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
@@ -114,7 +114,7 @@ focus-within:border-[#8c7569]
                         onBlur={ handleBlur }
                     />
                     { errors.password && touched.password ? (
-                        <p className="text-[11px] text-blue-500 pl-[4px]">{ errors.password }</p>
+                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.password }</p>
                     ) : null }
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s]
@@ -132,7 +132,7 @@ focus-within:border-[#8c7569]
                         onBlur={ handleBlur }
                     />
                     { errors.confirm_password && touched.confirm_password ? (
-                        <p className="text-[11px] text-blue-500 pl-[4px]">{ errors.confirm_password }</p>
+                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.confirm_password }</p>
                     ) : null }
                 </div>
                 <button className="bg-blue-500 text-white px-3 py-1 rounded-sm" type="submit">
