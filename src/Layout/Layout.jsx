@@ -2,6 +2,7 @@
 import React from 'react'
 import { Footer, Header, MainContainer, SignIn, Signup } from '../Components'
 import { Outlet, createBrowserRouter } from 'react-router-dom'
+import RTE from '../Components/RTE'
 
 const Layout = () => {
 
@@ -27,6 +28,7 @@ export const router = createBrowserRouter([
             { path: "/", element: <MainContainer /> },
             { path: "/login", element: <SignIn /> },
             { path: "/signup", element: <Signup /> },
+            { path: "/allPost", element: <RTE /> },
         ]
     }
 ])

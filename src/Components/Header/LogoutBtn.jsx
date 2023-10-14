@@ -11,6 +11,7 @@ const LogoutBtn = () => {
         authService.logout()
             .then(() => { dispatch(logout()) })
             .catch((error) => console.log(error))
+        localStorage.clear();
         navigate("/signup", { replace: true })
 
     }
