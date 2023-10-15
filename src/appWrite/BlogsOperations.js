@@ -12,7 +12,6 @@ export class Service {
         this.client
             .setEndpoint(config.appWriteUrl)
             .setProject(config.appWriteProjectId)
-            .setKey(config.appWriteKey)
 
         this.dataBases = new Databases(this.client)
         this.storage = new Storage(this.client)
@@ -157,5 +156,5 @@ export class Service {
 }
 
 
-const service = new Service()
-export default service
+const appwriteBlogService = new Service()
+export default appwriteBlogService

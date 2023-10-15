@@ -1,11 +1,37 @@
-import React from 'react'
-import { Editor } from "@tinymce/tinymce-react"
-const RTE = ({ name, control, label, defaultValue = "" }, ref) => {
-    return (
-        <div>
-            { label && <label>{ label }</label> }
-        </div>
-    )
-}
+// code not used for now
+import React from 'react';
+import { Field, Formik, Form } from 'formik';
 
-export default React.forwardRef(RTE)
+const RTE = ({ name, label, defaultValue = "" }) => {
+    return (
+        <div className='w-full'>
+            { label && <label className='inline-block mb-1 pl-1'>{ label }</label> }
+
+            <Formik
+                initialValues={ { [name || 'content']: defaultValue } }
+                onSubmit={ (values) => {
+                    // Handle form submission
+                    console.log(values);
+                } }
+            >
+                { ({ values, handleChange }) => (
+                    <Form>
+                        <Field name={ name || 'content' }>
+                            { ({ field }) => (
+                                <textarea
+                                    rows="10" // You can adjust the number of rows as needed
+                                    className="w-full border rounded p-2"
+                                    { ...field }
+                                    onChange={ handleChange } // Use handleChange to update the form state
+                                />
+                            ) }
+                        </Field>
+                        <button type="submit">Submit</button>
+                    </Form>
+                ) }
+            </Formik>
+        </div>
+    );
+};
+
+export default RTE;
