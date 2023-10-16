@@ -1,13 +1,13 @@
 import React from 'react'
-import { Input } from "../index.js"
+import { Input } from "../Components/index.js"
 import { Link, useNavigate } from 'react-router-dom'
-import { signUpSchema } from "./AuthSchemas/SignupSchema.js"
+import { signUpSchema } from "../Components/Auth/AuthSchemas/SignupSchema.js"
 import { useFormik } from 'formik'
-import googleAuthLogo from "../../assets/google-color-svgrepo-com.svg"
-import discordAuthLogo from "../../assets/discord-svgrepo-com.svg"
-import authService from '../../appWrite/auth.js'
+import googleAuthLogo from "../assets/google-color-svgrepo-com.svg"
+import discordAuthLogo from "../assets/discord-svgrepo-com.svg"
+import authService from '../appWrite/auth.js'
 import { useDispatch } from 'react-redux'
-import { login } from '../../store/authSlice.js'
+import { login } from '../store/authSlice.js'
 
 const Signup = () => {
     const dispatch = useDispatch()
@@ -33,7 +33,8 @@ const Signup = () => {
 
                     if (session) {
                         const userData = await authService.getCurrentUser()
-                        if (userData) dispatch(login(userData))
+                        console.log(userData);
+                        if (userData) dispatch(login(userData));
                         navigate("/")
                     }
 

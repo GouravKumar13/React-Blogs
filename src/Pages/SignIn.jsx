@@ -1,15 +1,15 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import authService from "../../appWrite/auth"
+import { useDispatch, useSelector } from 'react-redux'
+import authService from "../appWrite/auth"
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-import { login as authLogin } from '../../store/authSlice'
-import Input from '../Utils/Input'
+import { login } from '../store/authSlice'
+import Input from '../Components/Utils/Input'
 import { useFormik } from 'formik'
-import googleAuthLogo from "../../assets/google-color-svgrepo-com.svg"
-import discordAuthLogo from "../../assets/discord-svgrepo-com.svg"
-import { signInSchema } from './AuthSchemas/signinSchema'
+import googleAuthLogo from "../assets/google-color-svgrepo-com.svg"
+import discordAuthLogo from "../assets/discord-svgrepo-com.svg"
+import { signInSchema } from '../Components/Auth/AuthSchemas/SigninSchema'
 
 const SignIn = () => {
     const dispatch = useDispatch()
@@ -27,19 +27,24 @@ const SignIn = () => {
 
         onSubmit: async (values, action) => {
             try {
+
                 const session = await authService.login(values)
-                console.log(session)
+
                 if (session) {
                     // agar user hai to uska data le liya or store mai login call kar diya or navigate kar diya "/" pe
-                    const userData = await authService.getCurrentUser
+                    const userData = await authService.getCurrentUser()
+                    console.log(userData);
                     if (userData) {
-                        dispatch(authLogin(userData))
+                        dispatch(login(userData))
                         navigate("/")
                     }
                 }
+
+
+
             } catch (error) {
                 console.log(error)
-                alert("invalid credential")
+                alert("invalid credential ")
                 action.resetForm()
             }
             action.resetForm()

@@ -1,13 +1,15 @@
 import React from 'react';
 import { useFormik } from 'formik';
 import { Input, Select, } from '../index'; // Import your custom components
-import appwriteBlogService from '../../appwrite/BlogsOperations';
+import appwriteBlogService from '../../appWrite/BlogsOperations';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { data } from 'autoprefixer';
 
 export default function PostForm ({ post }) {
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
+    console.log(userData)
 
     const initialValue = {
         title: post?.title || '',
@@ -19,10 +21,26 @@ export default function PostForm ({ post }) {
 
     const formik = useFormik({
         initialValues: initialValue,
-        onSubmit: async (values) => {
-            console.log(values);
-            // Handle form submission logic here
-            // Access form values via values.title, values.slug, values.content, values.status, values.image
+        onSubmit: async (values, action) => {
+
+
+
+            const file = await appwriteBlogService.uploadFile(values.image)
+
+            if (file) {
+
+                const fileId = file.$id
+                values.image = fileId
+
+                const dbPost = await appwriteBlogService.createPost({ ...values, userId: userData.$id })
+                if (dbPost) {
+                    navigate(`/post/${dbPost.$id}`)
+                }
+            }
+
+
+
+            // action.resetForm()
         },
     });
 
@@ -31,11 +49,12 @@ export default function PostForm ({ post }) {
             return value
                 .trim()
                 .toLowerCase()
-                .replace(/[^a-zA-Z\d\s]+/g, '-')
+                .replace(/^[a-zA-Z\d\s]+/g, '-')
                 .replace(/\s/g, '-');
         }
         return '';
     };
+
 
     return (
         <form onSubmit={ formik.handleSubmit } className="flex flex-wrap border border-neutral-950 drop-shadow-md h-[80vh] my-11 p-3 ">
