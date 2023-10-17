@@ -7,4 +7,4 @@ import Input from "./Utils/Input";
 import RTE from "./RTE";
 import Select from "./Utils/Select";
 
-export { Header, Footer, MainContainer, SignIn, Signup, Input, Select }
+export { Header, Footer, MainContainer, SignIn, Signup, Input, Select, RTE }

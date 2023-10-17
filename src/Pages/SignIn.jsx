@@ -2,56 +2,38 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import authService from "../appWrite/auth"
 import { Link, useNavigate } from 'react-router-dom'
-
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react'
 import { login } from '../store/authSlice'
 import Input from '../Components/Utils/Input'
-import { useFormik } from 'formik'
 import googleAuthLogo from "../assets/google-color-svgrepo-com.svg"
 import discordAuthLogo from "../assets/discord-svgrepo-com.svg"
 import { signInSchema } from '../Components/Auth/AuthSchemas/SigninSchema'
+import { useForm } from 'react-hook-form'
+
+
 
 const SignIn = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    console.log("hello ")
-    const initialValues = {
-        email: "",
-        password: ""
-    }
-    const { values, handleBlur, handleChange, handleSubmit, errors, touched } = useFormik({
-        initialValues,
-        validationSchema: signInSchema,
-        validateOnBlur: false,
-        validateOnChange: true,
+    const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(signInSchema) });
 
-        onSubmit: async (values, action) => {
-            try {
+    const authLogin = async (data) => {
 
-                const session = await authService.login(values)
-
-                if (session) {
-                    // agar user hai to uska data le liya or store mai login call kar diya or navigate kar diya "/" pe
-                    const userData = await authService.getCurrentUser()
-                    console.log(userData);
-                    if (userData) {
-                        dispatch(login(userData))
-                        navigate("/")
-                    }
-                }
-
-
-
-            } catch (error) {
-                console.log(error)
-                alert("invalid credential ")
-                action.resetForm()
+        try {
+            const session = await authService.login(data)
+            if (session) {
+                const userData = await authService.getCurrentUser()
+                if (userData) dispatch(login(userData));
+                navigate("/")
             }
-            action.resetForm()
+        } catch (error) {
+            alert(error.message)
+            // add react toast instead of alert
         }
+    }
 
 
-    })
 
 
 
@@ -67,36 +49,34 @@ const SignIn = () => {
             </div>
             <hr className='w-full ' />
             <h1 className="font-bold text-3xl text-neutral-700 ">Welcome!</h1>
-            < form onSubmit={ handleSubmit } className='flex flex-col items-center  w-[80%]'  >
+            < form onSubmit={ handleSubmit(authLogin) } className='flex flex-col items-center  w-[80%]'  >
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
                     " >
                     <Input label="Email" type="email" placeholder=" Enter Email"
-                        autoComplete="off"
                         name="email"
-                        value={ values.email }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register("email", {
+                            required: true,
+
+                        }) }
 
 
                     />
-                    { errors.email && touched.email ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.email }</p>
-                    ) : null }
+                    <p className='text-red-500 text-xs pl-2'>{ errors.email?.message }</p>
+
+
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
                     " >
                     <Input label="Password" type="Password" placeholder=" Enter Password"
                         autoComplete="off"
                         name="password"
-                        value={ values.password }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register("password", {
+                            required: true,
+                        }) }
 
 
                     />
-                    { errors.password && touched.password ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.password }</p>
-                    ) : null }
+                    <p className='text-red-500 text-xs pl-2'>{ errors.password?.message }</p>
                 </div>
                 <button className="bg-blue-500 text-white px-3 py-1 rounded-sm" type="submit">
                     LOGIN

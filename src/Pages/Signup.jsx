@@ -2,52 +2,31 @@ import React from 'react'
 import { Input } from "../Components/index.js"
 import { Link, useNavigate } from 'react-router-dom'
 import { signUpSchema } from "../Components/Auth/AuthSchemas/SignupSchema.js"
-import { useFormik } from 'formik'
 import googleAuthLogo from "../assets/google-color-svgrepo-com.svg"
 import discordAuthLogo from "../assets/discord-svgrepo-com.svg"
 import authService from '../appWrite/auth.js'
 import { useDispatch } from 'react-redux'
 import { login } from '../store/authSlice.js'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 
 const Signup = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const initialValues = {
-        name: "",
-        email: "",
-        password: "",
-        confirm_password: "",
-    };
-
-    const { values, handleBlur, handleChange, handleSubmit, errors, touched } =
-        useFormik({
-            initialValues: initialValues,
-            validationSchema: signUpSchema,
-            validateOnChange: true,
-            validateOnBlur: false,
-
-            onSubmit: async (values, action) => {
-
-                try {
-                    const session = await authService.createAccount(values)
-
-                    if (session) {
-                        const userData = await authService.getCurrentUser()
-                        console.log(userData);
-                        if (userData) dispatch(login(userData));
-                        navigate("/")
-                    }
-
-                } catch (error) {
-                    console.log(error)
-                    action.resetForm()
-
-                }
-                action.resetForm()
-            },
-        });
-
-
+    const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(signUpSchema) });
+    const createUser = async (data) => {
+        console.log(data)
+        try {
+            const userData = await authService.createAccount(data)
+            if (userData) {
+                const userData = await authService.getCurrentUser()
+                if (userData) dispatch(login(userData));
+                navigate("/")
+            }
+        } catch (error) {
+            alert(error.message)
+        }
+    }
 
 
     return (
@@ -65,7 +44,7 @@ const Signup = () => {
             <hr className='w-full ' />
             <h1 className="font-bold text-3xl text-neutral-700 ">Welcome!</h1>
 
-            <form onSubmit={ handleSubmit } className='flex flex-col items-center  w-[80%]' >
+            <form onSubmit={ handleSubmit(createUser) } className='flex flex-col items-center  w-[80%]' >
                 <div className=" w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s]
 focus-within:border-[#8c7569]
                     ">
@@ -74,14 +53,12 @@ focus-within:border-[#8c7569]
                         type="name"
                         autoComplete="off"
                         name="name"
-                        placeholder="Name"
-                        value={ values.name }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register("name", {
+                            required: true,
+                        }) }
+
                     />
-                    { touched.name && errors.name ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.name }</p>
-                    ) : null }
+                    <p className='text-red-500 text-xs pl-2'>{ errors.name?.message }</p>
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s]
 focus-within:border-[#8c7569]
@@ -92,14 +69,14 @@ focus-within:border-[#8c7569]
                         type="email"
                         autoComplete="off"
                         name="email"
-                        placeholder="Email"
-                        value={ values.email }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register('email', {
+                            required: true,
+                        }) }
+
                     />
-                    { errors.email && touched.email ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.email }</p>
-                    ) : null }
+
+                    <p className="text-[11px] text-red-500 pl-[4px]">{ errors.email?.message }</p>
+
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
                     " >
@@ -110,14 +87,12 @@ focus-within:border-[#8c7569]
                         autoComplete="off"
                         name="password"
 
-                        placeholder="Password"
-                        value={ values.password }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register('password', {
+                            required: true,
+                        }) }
                     />
-                    { errors.password && touched.password ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.password }</p>
-                    ) : null }
+                    <p className="text-[11px] text-red-500 pl-[4px]">{ errors.password?.message }</p>
+
                 </div>
                 <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s]
 focus-within:border-[#8c7569]
@@ -128,14 +103,12 @@ focus-within:border-[#8c7569]
                         type="Password"
                         autoComplete="off"
                         name="confirm_password"
-                        placeholder="Confirm Password"
-                        value={ values.confirm_password }
-                        onChange={ handleChange }
-                        onBlur={ handleBlur }
+                        { ...register('confirm_password', {
+                            required: true,
+                        }) }
                     />
-                    { errors.confirm_password && touched.confirm_password ? (
-                        <p className="text-[11px] text-red-500 pl-[4px]">{ errors.confirm_password }</p>
-                    ) : null }
+                    <p className="text-[11px] text-red-500 pl-[4px]">{ errors.confirm_password?.message }</p>
+
                 </div>
                 <button className="bg-blue-500 text-white px-3 py-1 rounded-sm" type="submit">
                     Registration
