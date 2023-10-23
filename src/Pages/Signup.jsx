@@ -15,7 +15,7 @@ const Signup = () => {
     const navigate = useNavigate()
     const { register, formState: { errors }, handleSubmit } = useForm({ resolver: yupResolver(signUpSchema) });
     const createUser = async (data) => {
-        console.log(data)
+
         try {
             const userData = await authService.createAccount(data)
             if (userData) {

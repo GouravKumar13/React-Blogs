@@ -19,7 +19,7 @@
     "@reduxjs/toolkit": "^1.9.6",
     "@tinymce/tinymce-react": "^4.3.0",
     "appwrite": "^13.0.0",
-    "html-react-parser": "^4.2.2",
+    "html-react-parser": "^4.2.5",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "react-redux": "^8.1.3",

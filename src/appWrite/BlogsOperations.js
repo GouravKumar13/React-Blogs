@@ -27,7 +27,6 @@ export class Service {
                 slug,
                 {
                     title,
-                    slug,
                     content,
                     featuredImage,
                     status,
@@ -41,7 +40,7 @@ export class Service {
     }
 
     // Upload Post
-    async updatePost (slug, { title, content, featuredImage, status, userId }) {
+    async updatePost (slug, { title, content, featuredImage, status }) {
         try {
             await this.dataBases.updateDocument(
                 config.appWriteDatabaseId,
@@ -52,7 +51,6 @@ export class Service {
                     content,
                     featuredImage,
                     status,
-                    userId,
                 })
 
         } catch (error) {
@@ -85,7 +83,7 @@ export class Service {
                 slug,
 
             )
-            return true
+
         } catch (error) {
             throw error
             return false
@@ -95,9 +93,9 @@ export class Service {
 
 
     // Active posts
-    async getActivePosts (queries = [Query.equal("status", "active")]) {
+    async getAllPosts (queries = [Query.equal("status", "active")]) {
         try {
-            await this.dataBases.listDocuments(
+            return await this.dataBases.listDocuments(
                 config.appWriteDatabaseId,
                 config.appWriteCollectionId,
                 queries, //the above array can be given here
@@ -141,16 +139,12 @@ export class Service {
 
     //File Preview gives fast response so no need to use async
     async getFilePreview (fileId) {
-        try {
-            return await this.storage.getFilePreview(
-                config.appWriteBucketId,
-                fileId
 
-            )
-        } catch (error) {
-            throw error
-            return false
-        }
+        return this.storage.getFilePreview(
+            config.appWriteBucketId,
+            fileId
+
+        )
     }
 
 }

@@ -1,10 +1,12 @@
+/* eslint-disable react/prop-types */
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { Input, RTE, Select } from "../index";
-import appwriteBlogService from "../../appWrite/BlogsOperations.js";
+import { Input, RTE, Select } from "..";
+import appwriteBlogService from "../../appwrite/BlogsOperations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+// eslint-disable-next-line react/prop-types
 export default function PostForm ({ post }) {
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
@@ -17,7 +19,6 @@ export default function PostForm ({ post }) {
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
-    console.log(userData)
 
     const submit = async (data) => {
         console.log(data)
@@ -115,7 +116,7 @@ export default function PostForm ({ post }) {
                     className="mb-4"
                     { ...register("status", { required: true }) }
                 />
-                <button type="submit" bgColor={ post ? "bg-green-500" : undefined } className="w-full">
+                <button type="submit" className={ `${post ? "bg-green-500" : "bg-blue-500"} text-white px-3 py-1 rounded-sm` }>
                     { post ? "Update" : "Submit" }
                 </button>
             </div>
