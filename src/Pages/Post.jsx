@@ -25,7 +25,7 @@ export default function Post () {
     const deletePost = () => {
         appwriteBlogService.deletePost(post.$id).then((status) => {
             if (status) {
-                appwriteService.deleteFile(post.featuredImage);
+                appwriteBlogService.deleteFile(post.featuredImage);
                 navigate("/");
             }
         });
@@ -44,13 +44,13 @@ export default function Post () {
                 { isAuthor && (
                     <div className="absolute right-6 top-6">
                         <Link to={ `/edit-post/${post.$id}` }>
-                            <Button bgColor="bg-green-500" className="mr-3">
+                            <button bgColor="bg-green-500" className="mr-3">
                                 Edit
-                            </Button>
+                            </button>
                         </Link>
-                        <Button bgColor="bg-red-500" onClick={ deletePost }>
+                        <button bgColor="bg-red-500" onClick={ deletePost }>
                             Delete
-                        </Button>
+                        </button>
                     </div>
                 ) }
             </div>

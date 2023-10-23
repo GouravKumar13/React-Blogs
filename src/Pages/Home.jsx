@@ -6,7 +6,7 @@ function Home () {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        appwriteBlogService.getPosts().then((posts) => {
+        appwriteBlogService.getAllPosts().then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
             }
@@ -22,6 +22,11 @@ function Home () {
                         <h1 className="text-2xl font-bold hover:text-gray-500">
                             Login to read posts
                         </h1>
+                        <div>
+                            <h3>Guest user </h3>
+                            <p><span className='text-blue-500 font-medium capitalize '>email:</span> mvp@gmail.com</p>
+                            <p><span className='text-blue-500 font-medium capitalize '>password:</span> 1234567890</p>
+                        </div>
                     </div>
                 </div>
 
