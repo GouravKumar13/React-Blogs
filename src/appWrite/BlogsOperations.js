@@ -139,7 +139,6 @@ export class Service {
 
     //File Preview gives fast response so no need to use async
     async getFilePreview (fileId) {
-
         return this.storage.getFilePreview(
             config.appWriteBucketId,
             fileId

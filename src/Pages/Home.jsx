@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import appwriteBlogService from '../appwrite/BlogsOperations'
 import { PostCard } from '../Components/index'
+import { useSelector } from 'react-redux'
 
 function Home () {
     const [posts, setPosts] = useState([])
-
+    const authStatus = useSelector((store) => store.auth.userData)
     useEffect(() => {
-        appwriteBlogService.getAllPosts().then((posts) => {
-            if (posts) {
-                setPosts(posts.documents)
-            }
-        })
+        if (authStatus) {
+            appwriteBlogService.getAllPosts().then((posts) => {
+                if (posts) {
+                    setPosts(posts.documents)
+                }
+            })
+        }
     }, [])
-
-    if (posts.length === 0) {
-        return (
+    console.log(posts)
+    return (posts.length === 0) ?
+        (
             <div className="w-full py-8 mt-4 text-center">
 
                 <div className="flex flex-wrap">
@@ -32,20 +35,19 @@ function Home () {
 
             </div>
         )
-    }
-    return (
-        <div className='w-full py-8'>
+        : (
+            <div className='w-full py-8'>
 
-            <div className='flex flex-wrap'>
-                { posts.map((post) => (
-                    <div key={ post.$id } className='p-2 w-1/4'>
-                        <PostCard { ...post } />
-                    </div>
-                )) }
+                <div className='flex flex-wrap'>
+                    { posts.map((post) => (
+                        <div key={ post.$id } className='p-2 w-1/4'>
+                            <PostCard { ...post } />
+                        </div>
+                    )) }
+                </div>
+
             </div>
-
-        </div>
-    )
+        )
 }
 
 export default Home
