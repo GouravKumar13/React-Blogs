@@ -42,7 +42,7 @@ export class Service {
     // Upload Post
     async updatePost (slug, { title, content, featuredImage, status }) {
         try {
-            await this.dataBases.updateDocument(
+            return await this.dataBases.updateDocument(
                 config.appWriteDatabaseId,
                 config.appWriteCollectionId,
                 slug,

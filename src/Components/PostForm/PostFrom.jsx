@@ -5,9 +5,11 @@ import { Input, RTE, Select } from "..";
 import appwriteBlogService from "../../appwrite/BlogsOperations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 // eslint-disable-next-line react/prop-types
 export default function PostForm ({ post }) {
+    const [url, setUrl] = useState(null)
     const { register, handleSubmit, watch, setValue, control, getValues } = useForm({
         defaultValues: {
             title: post?.title || "",
@@ -16,6 +18,12 @@ export default function PostForm ({ post }) {
             status: post?.status || "active",
         },
     });
+
+    const getUrl = (post) => {
+        appwriteBlogService.getFilePreview(post.featuredImage)
+            .then((res => setUrl(res.href)))
+    }
+
 
     const navigate = useNavigate();
     const userData = useSelector((state) => state.auth.userData);
@@ -35,6 +43,7 @@ export default function PostForm ({ post }) {
             });
 
             if (dbPost) {
+
                 navigate(`/post/${dbPost.$id}`);
             }
         } else {
@@ -62,7 +71,7 @@ export default function PostForm ({ post }) {
 
         return "";
     }, []);
-
+    if (post) getUrl(post)
     React.useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
@@ -98,13 +107,13 @@ export default function PostForm ({ post }) {
                     label="Featured Image :"
                     type="file"
                     className="mb-4"
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    accept="image/png, image/jpg, image/jpeg, image/gif,image/webp"
                     { ...register("image", { required: !post }) }
                 />
                 { post && (
                     <div className="w-full mb-4">
                         <img
-                            src={ appwriteBlogService.getFilePreview(post.featuredImage) }
+                            src={ url }
                             alt={ post.title }
                             className="rounded-lg"
                         />

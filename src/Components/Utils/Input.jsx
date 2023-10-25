@@ -16,7 +16,7 @@ const Input = ({
             }
             <input
                 type={ type }
-                className={ ` outline-none border-none pl-[4px] text-sm ${className} ` }
+                className={ `focus:outline-blue-300 rounded-sm outline-none border-none pl-[4px] text-sm ${className} ` }
                 id={ id }
                 { ...props }
                 ref={ ref } />

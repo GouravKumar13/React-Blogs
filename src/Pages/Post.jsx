@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import appwriteBlogService from '../appwrite/BlogsOperations'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
 
 export default function Post () {
     const [post, setPost] = useState(null);
@@ -29,12 +30,33 @@ export default function Post () {
     }, [slug, navigate]);
 
     const deletePost = () => {
-        appwriteBlogService.deletePost(post.$id).then((status) => {
-            if (status) {
-                appwriteBlogService.deleteFile(post.featuredImage);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            width: '20 rem ',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+
+            if (result.isConfirmed) {
+                appwriteBlogService.deletePost(post.$id).then((status) => {
+                    if (status) {
+                        appwriteBlogService.deleteFile(post.featuredImage)
+
+                    }
+                });
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
                 navigate("/");
             }
-        });
+        })
+
     };
     const getUrl = (post) => {
 
@@ -48,7 +70,7 @@ export default function Post () {
 
     }
 
-    console.log("render")
+
     return post ? (
 
         <div className="py-8">
@@ -57,7 +79,7 @@ export default function Post () {
                 <img
                     src={ url }
                     alt={ post.title }
-                    className="rounded-xl"
+                    className="rounded-xl object-contain drop-shadow-lg"
                 />
 
                 { isAuthor && (
@@ -74,9 +96,9 @@ export default function Post () {
                 ) }
             </div>
             <div className="w-full mb-6">
-                <h1 className="text-2xl  font-semibold ">{ post.title }</h1>
+                <h1 className="text-2xl uppercase text-neutral-950   font-semibold ">{ post.title }</h1>
             </div>
-            <div className="browser-css">
+            <div className="text-lg text-slate-800 ">
                 { parse(post.content) }
             </div>
 
