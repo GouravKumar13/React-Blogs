@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import appwriteBlogService from '../appwrite/BlogsOperations'
+import appwriteBlogService from '../appWrite/BlogsOperations'
 import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
