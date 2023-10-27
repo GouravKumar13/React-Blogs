@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import appwriteBlogService from '../appwrite/BlogsOperations'
+import appwriteBlogService from '../appWrite/BlogsOperations'
 import { PostCard } from '../Components/index'
 import { useSelector } from 'react-redux'
 import LoginImage from "../assets/undraw_login_re_4vu2.svg"

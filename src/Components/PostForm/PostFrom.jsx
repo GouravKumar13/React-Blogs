@@ -2,7 +2,7 @@
 import React, { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Input, RTE, Select } from "..";
-import appwriteBlogService from "../../appwrite/BlogsOperations";
+import appwriteBlogService from "../../appWrite/BlogsOperations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
