@@ -51,7 +51,7 @@ function Header () {
                 </Link>
 
             </div>
-            <div className='w-[40%] flex'>
+            <div className='w-[40%] hidden md:flex'>
                 <input className='relative w-full focus:border drop-shadow rounded-md text-center py-1 focus:border-blue-600 outline-none' type="text" placeholder='you will be able to search here' />
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={ 1.5 } stroke="currentColor" className="absolute top-4 mx-1 w-6 h-6">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />

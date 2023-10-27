@@ -8,7 +8,7 @@ function PostCard ({ $id, title, featuredImage, }) {
     useEffect(() => {
         appwriteBlogService.getFilePreview(featuredImage).then((res) => setUrl(res.href))
     }, [])
-    console.log(url)
+
     return (
         <Link to={ `/post/${$id}` }>
             <div className='w-[313px] max-h-[300px] h-[300px] border hover:border-blue-500  rounded-xl  '>
