@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import appwriteBlogService from '../appwrite/BlogsOperations'
+import appwriteBlogService from '../appWrite/BlogsOperations'
 import { Link } from 'react-router-dom'
 
 function PostCard ({ $id, title, featuredImage, }) {
