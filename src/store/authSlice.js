@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 let authStatus = localStorage.getItem("authStatus")
 if (!authStatus) {
     authStatus = false
@@ -10,6 +11,7 @@ if (!userData) {
     userData = null
 
 }
+
 const initialState = {
     status: authStatus,
     userData: userData
@@ -27,7 +29,7 @@ const authSlice = createSlice({
             state.status = true,
                 state.userData = action.payload
             localStorage.setItem("authStatus", state.status)
-            localStorage.setItem("userData", action.payload)
+            localStorage.setItem("userData", JSON.stringify(action.payload))
 
         },
         logout: (state) => {

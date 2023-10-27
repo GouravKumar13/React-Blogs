@@ -19,7 +19,7 @@ function Home () {
     }, [authStatus])
 
 
-    console.log(posts)
+
     if (!authStatus) {
         return (
 
