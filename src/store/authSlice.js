@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-let status = localStorage.getItem("authStatus")
-if (!status) {
-    status = false
+let authStatus = localStorage.getItem("authStatus")
+if (!authStatus) {
+    authStatus = false
 }
 
 let userData = localStorage.getItem("userData")
@@ -11,7 +11,7 @@ if (!userData) {
 
 }
 const initialState = {
-    status: status,
+    status: authStatus,
     userData: userData
 
 }
