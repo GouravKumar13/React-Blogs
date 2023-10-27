@@ -40,7 +40,6 @@ const SignIn = () => {
     }
 
 
-
     return (
         <>
             <Toaster
@@ -103,6 +102,8 @@ const SignIn = () => {
                 <p className="text-slate-500 mt-3">
                     Not have an account? <Link to="/signup" className=' text-blue-500'>Sign Up</Link>
                 </p>
+
+
 
             </div>
         </>

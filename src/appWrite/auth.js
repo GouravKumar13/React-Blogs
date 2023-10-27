@@ -60,6 +60,15 @@ export class AuthService {
             throw error
         }
     }
+
+    async recoverPassword ({ email }) {
+        try {
+            const res = await this.account.createRecovery(email, "http://localhost:5173")
+            console.log(res)
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 

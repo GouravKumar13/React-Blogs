@@ -37,6 +37,7 @@ export const router = createBrowserRouter([
                         <SignIn />
                     </AuthGurd>
             },
+
             {
                 path: "/signup", element:
                     <AuthGurd authentication={ false }>
