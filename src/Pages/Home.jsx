@@ -3,6 +3,7 @@ import appwriteBlogService from '../appWrite/BlogsOperations'
 import { PostCard } from '../Components/index'
 import { useSelector } from 'react-redux'
 import LoginImage from "../assets/undraw_login_re_4vu2.svg"
+import noPostImage from "../assets/noPostimage.svg"
 
 function Home () {
     const [posts, setPosts] = useState([])
@@ -18,7 +19,7 @@ function Home () {
     }, [authStatus])
 
 
-
+    console.log(posts)
     if (!authStatus) {
         return (
 
@@ -39,16 +40,14 @@ function Home () {
 
     return (posts.length === 0) ?
         (
-            <div className="w-full py-8 mt-4 text-center">
+            <div className="w-full  flex justify-center my-36">
 
-                <div className="flex flex-wrap">
-                    <div className="p-2 w-full">
-                        <h1 className="text-2xl font-bold hover:text-gray-500">
-                            No post available to read
-                        </h1>
 
-                    </div>
+                <div className="object-contain w-[400px] h-[400px]">
+                    <img src={ noPostImage } alt="No post image" />
+
                 </div>
+
 
             </div>
         )
