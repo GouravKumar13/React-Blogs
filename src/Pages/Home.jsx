@@ -15,7 +15,7 @@ function Home () {
                 }
             })
         }
-    }, [authStatus])
+    }, [authStatus, posts])
 
 
 
