@@ -11,11 +11,10 @@ export default function Post () {
     const { slug } = useParams();
     const navigate = useNavigate();
 
-    const Data = useSelector((state) => state.auth.userData);
-    const userData = JSON.parse(Data)
+    const userData = useSelector((state) => state.auth.userData);
+
     const isAuthor = post && userData ? post.userId === userData.$id : false;
-    console.log(post)
-    console.log(userData)
+
     useEffect(() => {
 
         if (slug) {
@@ -43,12 +42,14 @@ export default function Post () {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                appwriteBlogService.deletePost(post.$id).then((status) => {
+                const data = appwriteBlogService.deletePost(post.$id).then((status) => {
                     if (status) {
                         appwriteBlogService.deleteFile(post.featuredImage)
 
+
                     }
                 });
+
                 Swal.fire(
                     'Deleted!',
                     'Your file has been deleted.',

@@ -27,6 +27,7 @@ const SignIn = () => {
             if (session) {
                 const userData = await authService.getCurrentUser()
                 if (userData) dispatch(login(userData))
+
             }
         } catch (error) {
             toast.error('Invalid credential')
