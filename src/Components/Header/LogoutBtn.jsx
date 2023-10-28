@@ -13,7 +13,7 @@ const LogoutBtn = () => {
             .catch((error) => console.log(error))
 
         navigate("/signup", { replace: true })
-        localStorage.clear()
+
 
 
     }

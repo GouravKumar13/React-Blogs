@@ -11,8 +11,7 @@ import LogoutBtn from "../Header/LogoutBtn"
 function Header () {
 
     const authStatus = useSelector((state) => state.auth.status) // getting the status from auth
-    // const navigate = useNavigate()
-    console.log(authStatus)
+
     const navItems = [
         {
             name: "Home",
