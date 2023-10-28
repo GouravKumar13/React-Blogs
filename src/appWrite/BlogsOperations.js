@@ -6,7 +6,7 @@ import { Client, ID, Databases, Storage, Query } from "appwrite"
 export class Service {
     client = new Client()
     dataBases;
-    storage; //bucket
+    bucket
 
     constructor() {
         this.client
@@ -14,7 +14,7 @@ export class Service {
             .setProject(config.appWriteProjectId)
 
         this.dataBases = new Databases(this.client)
-        this.storage = new Storage(this.client)
+        this.bucket = new Storage(this.client)
 
     }
 
@@ -109,7 +109,7 @@ export class Service {
     //file upload
     async uploadFile (file) {
         try {
-            return await this.storage.createFile(
+            return await this.bucket.createFile(
                 config.appWriteBucketId,
                 ID.unique(),
                 file
@@ -125,7 +125,7 @@ export class Service {
 
     async deleteFile (fileId) {
         try {
-            await this.storage.deleteFile(
+            await this.bucket.deleteFile(
                 config.appWriteBucketId,
                 fileId
 
@@ -139,7 +139,7 @@ export class Service {
 
     //File Preview gives fast response so no need to use async
     async getFilePreview (fileId) {
-        return this.storage.getFilePreview(
+        return this.bucket.getFilePreview(
             config.appWriteBucketId,
             fileId
 

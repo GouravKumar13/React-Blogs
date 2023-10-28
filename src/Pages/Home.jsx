@@ -11,14 +11,14 @@ function Home () {
 
 
     useEffect(() => {
-        if (authStatus) {
-            appwriteBlogService.getAllPosts().then((posts) => {
-                if (posts) {
-                    setPosts(posts.documents)
-                }
-            })
-        }
-    }, [authStatus])
+
+        appwriteBlogService.getAllPosts().then((posts) => {
+            if (posts) {
+                setPosts(posts.documents)
+            }
+        })
+
+    }, [])
 
 
 
