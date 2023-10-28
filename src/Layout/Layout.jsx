@@ -31,31 +31,35 @@ export const router = createBrowserRouter([
         children: [
             { path: "/", element: <Home /> },
             {
-                path: "/login", element:
+                path: "/login", element: (
+
                     <AuthGurd authentication={ false }>
 
                         <SignIn />
-                    </AuthGurd>
+                    </AuthGurd>)
             },
 
             {
-                path: "/signup", element:
-                    <AuthGurd authentication={ false }>
+                path: "/signup",
+                element:
+                    (<AuthGurd authentication={ false }>
                         <Signup />
-                    </AuthGurd>
+                    </AuthGurd>)
             },
             {
-                path: "/addPost", element:
-                    <AuthGurd authentication>
+                path: "/addPost",
+                element:
+                    (<AuthGurd authentication>
                         <AddPost />
-                    </AuthGurd>
+                    </AuthGurd>)
 
             },
             {
-                path: "/allPost", element:
-                    <AuthGurd authentication>
+                path: "/allPost",
+                element:
+                    (<AuthGurd authentication>
                         <AllPost />
-                    </AuthGurd>
+                    </AuthGurd>)
             },
             {
                 path: "/edit-post/:slug",

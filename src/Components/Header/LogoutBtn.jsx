@@ -9,10 +9,10 @@ const LogoutBtn = () => {
     const navigate = useNavigate()
     const logoutHandler = () => {
         authService.logout()
-            .then(() => { dispatch(logout()) })
-            .catch((error) => console.log(error))
+            .then(() => {
+                dispatch(logout())
+            })
 
-        navigate("/signup", { replace: true })
 
 
 

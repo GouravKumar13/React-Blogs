@@ -40,7 +40,7 @@ export class Service {
     }
 
     // Upload Post
-    async updatePost (slug, { title, content, featuredImage, status }) {
+    async updatePost (slug, { title, content, featuredImage, status, }) {
         try {
             return await this.dataBases.updateDocument(
                 config.appWriteDatabaseId,
@@ -51,6 +51,7 @@ export class Service {
                     content,
                     featuredImage,
                     status,
+
                 })
 
         } catch (error) {
@@ -70,7 +71,7 @@ export class Service {
             )
             return true
         } catch (error) {
-            throw error
+            console.log("Appwrite service :: deletePost :: error", error);
             return false
         }
     }
@@ -85,7 +86,7 @@ export class Service {
             )
 
         } catch (error) {
-            throw error
+            console.log("Appwrite serive :: getPost :: error", error);
             return false
 
         }
@@ -101,7 +102,7 @@ export class Service {
                 queries, //the above array can be given here
             )
         } catch (error) {
-            throw error
+            console.log("Appwrite serive :: getPosts :: error", error);
             return false
         }
     }
@@ -116,7 +117,7 @@ export class Service {
 
             )
         } catch (error) {
-            throw error
+            console.log("Appwrite serive :: uploadFile :: error", error);
             return false
         }
     }
@@ -132,7 +133,7 @@ export class Service {
             )
             return true
         } catch (error) {
-            throw error
+            console.log("Appwrite serive :: deleteFile :: error", error);
             return false
         }
     }

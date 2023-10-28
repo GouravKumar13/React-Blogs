@@ -4,7 +4,7 @@ import authService from "../appWrite/auth"
 import { Link, useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useState } from 'react'
-import { login } from '../store/authSlice'
+import { login as authSliceLogin } from '../store/authSlice'
 import Input from '../Components/Utils/Input'
 import googleAuthLogo from "../assets/google-color-svgrepo-com.svg"
 import discordAuthLogo from "../assets/discord-svgrepo-com.svg"
@@ -26,8 +26,8 @@ const SignIn = () => {
             const session = await authService.login(data)
             if (session) {
                 const userData = await authService.getCurrentUser()
-                if (userData) dispatch(login(userData))
-
+                if (userData) dispatch(authSliceLogin(userData))
+                navigate('/')
             }
         } catch (error) {
             toast.error('Invalid credential')

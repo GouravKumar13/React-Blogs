@@ -30,7 +30,7 @@ export default function PostForm ({ post }) {
 
 
     const submit = async (data) => {
-        console.log(data)
+
         if (post) {
             const file = data.image[0] ? await appwriteBlogService.uploadFile(data.image[0]) : null;
 

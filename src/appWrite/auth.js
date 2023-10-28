@@ -50,7 +50,6 @@ export class AuthService {
 
         }
 
-        return null;
     }
 
     async logout () {
