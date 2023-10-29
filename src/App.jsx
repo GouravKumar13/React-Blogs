@@ -1,29 +1,27 @@
-import { useState, useEffect } from "react"
-import { useDispatch } from "react-redux"
-import authService from "./appWrite/auth"
-import { logout, login } from "./store/authSlice"
-import Layout from "./Layout/Layout"
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import authService from './appWrite/auth';
+import { logout, login } from './store/authSlice';
+import Layout from './Layout/Layout';
 
 function App () {
-  const [loading, setLoading] = useState(true)
-  const dispatch = useDispatch()
-
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const fetchData = async () => {
+    const userData = await authService.getCurrentUser();
+    if (userData) {
+      dispatch(login(userData));
+    } else {
+      dispatch(logout());
+    }
+    setLoading(false);
+  };
   useEffect(() => {
-    authService.getCurrentUser()
-      .then((userData) => {
-        if (userData) {
-          dispatch(login(userData))
-        }
-        else {
-          dispatch(logout())
-        }
-      })
-      .finally(() => { setLoading(false) })
-  }, [])
+    fetchData();
 
-  return !loading ?
-    <Layout /> :
-    <h1>Loading</h1>
+  }, []);
+
+  return !loading ? <Layout /> : <h1>Loading</h1>;
 }
 
-export default App
+export default App;

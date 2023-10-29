@@ -6,6 +6,7 @@ import AddPost from '../Pages/AddPost'
 import AllPost from '../Pages/AllPost'
 import EditPost from '../Pages/EditPost'
 import Post from '../Pages/Post'
+import App from '../App'
 
 
 const Layout = () => {
@@ -26,7 +27,7 @@ export default Layout
 export const router = createBrowserRouter([
     {
         path: "/",
-        element: <Layout />,
+        element: <App />,
         //include the error element here
         children: [
             { path: "/", element: <Home /> },

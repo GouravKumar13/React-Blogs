@@ -7,7 +7,7 @@ import noPostImage from "../assets/noPostimage.svg"
 
 function Home () {
     const [posts, setPosts] = useState([])
-    const authStatus = useSelector((store) => store.auth.userData)
+    const authStatus = useSelector((store) => store.auth.status)
 
 
     useEffect(() => {
