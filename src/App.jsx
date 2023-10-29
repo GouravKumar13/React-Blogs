@@ -7,6 +7,7 @@ import Layout from './Layout/Layout';
 function App () {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
+
   const fetchData = async () => {
     const userData = await authService.getCurrentUser();
     if (userData) {
