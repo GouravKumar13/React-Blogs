@@ -8,20 +8,17 @@ function App () {
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
 
-  const fetchData = async () => {
-    const userData = await authService.getCurrentUser();
-    if (userData) {
-      dispatch(login(userData));
-    } else {
-      dispatch(logout());
-    }
-    setLoading(false);
-  };
   useEffect(() => {
-    fetchData();
-
-  }, []);
-
+    authService.getCurrentUser()
+      .then((userData) => {
+        if (userData) {
+          dispatch(login({ userData }))
+        } else {
+          dispatch(logout())
+        }
+      })
+      .finally(() => setLoading(false))
+  }, [])
   return !loading ? <Layout /> : <h1>Loading</h1>;
 }
 
