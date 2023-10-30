@@ -76,7 +76,7 @@ export default function Post () {
 
     return post ? (
 
-        <div className="py-8">
+        <div className="py-8 z-0">
 
             <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                 <img

@@ -45,10 +45,10 @@ function Header () {
     ]
     return (
 
-        <nav className=' flex items-center justify-between  md:my-2   h-12    w-full'>
+        <nav className=' flex items-center justify-between   md:my-2   h-12    w-full'>
             <div>
                 <Link to="/">
-                    <h1 className='cursor-pointer font-bold  text-3xl'>SPEECH</h1>
+                    <h1 className='cursor-pointer font-bold ml-2 md:ml-0 text-3xl'>SPEECH</h1>
                 </Link>
 
             </div>
@@ -85,7 +85,7 @@ function Header () {
                 )
                 }
             </div>
-            <div className="block md:hidden">
+            <div className="block md:hidden mr-2 ">
 
                 { openNav ?
                     <>
@@ -100,7 +100,7 @@ function Header () {
                 }
             </div>
 
-            { openNav && <div className='md:hidden flex absolute top-16 right-4  w-[100px]  rounded py-2    items-center flex-col  bg-[#c6ccd8cc] backdrop-blur-md    justify-between '>
+            { openNav && <div className='z-10 md:hidden flex absolute top-16 right-4  w-[100px]  rounded py-2    items-center flex-col  bg-[#c6ccd8cc] backdrop-blur-md    justify-between '>
                 <ul className='flex flex-col w-full  gap-3  justify-around items-center font-semibold  ' >
                     {
                         navItems.map((navItem) =>
