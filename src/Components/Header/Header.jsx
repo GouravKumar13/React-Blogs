@@ -11,6 +11,7 @@ import LogoutBtn from "../Header/LogoutBtn"
 function Header () {
 
     const authStatus = useSelector((state) => state.auth.status) // getting the status from auth
+    const [openNav, setOpenNav] = React.useState(false)
 
     const navItems = [
         {
@@ -44,7 +45,7 @@ function Header () {
     ]
     return (
 
-        <nav className=' flex items-center justify-between  my-1 h-12    w-full'>
+        <nav className=' flex items-center justify-between  md:my-2   h-12    w-full'>
             <div>
                 <Link to="/">
                     <h1 className='cursor-pointer font-bold  text-3xl'>SPEECH</h1>
@@ -58,15 +59,19 @@ function Header () {
                 </svg>
 
             </div>
-            <div className='flex justify-between w-[25%]'>
-                <ul className='flex w-full   justify-around items-center font-semibold ' >
+
+
+            <div className='hidden md:flex  items-center flex-col md:flex-row  justify-between w-[25%]'>
+                <ul className='flex flex-col md:flex-row w-full  gap-3 lg:gap-0  justify-around items-center font-semibold ' >
                     {
                         navItems.map((navItem) =>
                         (
                             navItem.active ? (
                                 //add link after configuring browser router
                                 <Link to={ navItem.URL } key={ navItem.name }>
-                                    <li className='cursor-pointer'><p>{ navItem.name }</p></li>
+                                    <li className='cursor-pointer text-sm'><p>{ navItem.name }</p></li>
+
+
                                 </Link>
                             ) : null
 
@@ -74,11 +79,53 @@ function Header () {
                         )
                     }
                 </ul>
+
                 { authStatus && (
                     <LogoutBtn />
                 )
                 }
             </div>
+            <div className="block md:hidden">
+
+                { openNav ?
+                    <>
+                        <svg xmlns="http://www.w3.org/2000/svg" onClick={ () => setOpenNav(!openNav) } fill="none" viewBox="0 0 24 24" strokeWidth={ 1.5 } stroke="currentColor" className=" w-6 h-6">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </>
+                    :
+                    <svg onClick={ () => setOpenNav(!openNav) } xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={ 1.5 } stroke="currentColor" className="  w-6 h-6">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                    </svg>
+                }
+            </div>
+
+            { openNav && <div className='md:hidden flex absolute top-16 right-4  w-[100px]  rounded py-2    items-center flex-col  bg-[#c6ccd8cc] backdrop-blur-md    justify-between '>
+                <ul className='flex flex-col w-full  gap-3  justify-around items-center font-semibold  ' >
+                    {
+                        navItems.map((navItem) =>
+                        (
+                            navItem.active ? (
+                                //add link after configuring browser router
+                                <Link to={ navItem.URL } key={ navItem.name }>
+                                    <li className='cursor-pointer text-sm hover:bg[#6a8cd1cc] ' ><p>{ navItem.name }</p></li>
+
+
+                                </Link>
+                            ) : null
+
+                        )
+                        )
+                    }
+                </ul>
+
+                { authStatus && (
+                    <LogoutBtn />
+                )
+                }
+            </div> }
+
+
         </nav>
 
     )

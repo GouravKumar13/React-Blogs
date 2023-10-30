@@ -57,7 +57,7 @@ function Home () {
         : (
             <div className='w-full py-8 '>
 
-                <div className='flex flex-wrap justify-center items-center'>
+                <div className='flex flex-wrap justify-center '>
                     { posts.map((post) => {
 
                         return (
