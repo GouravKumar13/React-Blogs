@@ -55,14 +55,15 @@ function Home () {
             </div>
         )
         : (
-            <div className='w-full py-8'>
+            <div className='w-full py-8 '>
 
-                <div className='flex flex-wrap'>
+                <div className='flex flex-wrap justify-center items-center'>
                     { posts.map((post) => {
 
                         return (
 
-                            <div key={ post.$id } className='p-2 w-1/4'>
+                            <div key={ post.$id } className='
+                           flex flex-col p-2 w-fit'>
                                 <PostCard { ...post } />
                             </div>
                         )
