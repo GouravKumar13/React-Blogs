@@ -19,7 +19,13 @@ function App () {
       })
       .finally(() => setLoading(false))
   }, [])
-  return !loading ? <Layout /> : <h1>Loading</h1>;
+  return !loading ? <Layout /> :
+    <>
+      <div className="spinner-container">
+        <div className="loading-spinner">
+        </div>
+      </div>
+    </>;
 }
 
 export default App;
