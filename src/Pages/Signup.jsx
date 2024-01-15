@@ -49,6 +49,7 @@ const Signup = () => {
 focus-within:border-[#8c7569]
                     ">
                     <Input
+                        placeHolder="Enter your name"
                         label="Name"
                         type="name"
                         autoComplete="off"
@@ -65,6 +66,7 @@ focus-within:border-[#8c7569]
                     " >
 
                     <Input
+                        placeHolder="Enter your email"
                         label="Email"
                         type="email"
                         autoComplete="off"
@@ -82,6 +84,7 @@ focus-within:border-[#8c7569]
                     " >
 
                     <Input
+                        placeHolder="Enter your password"
                         label="Password"
                         type="password"
                         autoComplete="off"
@@ -99,6 +102,7 @@ focus-within:border-[#8c7569]
                     ">
 
                     <Input
+                        placeHolder="Confirm your password"
                         label="Confirm Password"
                         type="Password"
                         autoComplete="off"

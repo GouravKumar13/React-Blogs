@@ -40,7 +40,7 @@ const Footer = () => {
 
 
     return (
-        <footer className='flex flex-col gap-7 justify-center items-center px-10 pt-10 pb-2  mt-auto bg-neutral-900 will-change-transform text-white' >
+        <footer className='flex flex-col gap-7 justify-center items-center px-10 pt-10 pb-2  bg-slate-100 border-t-[1px] border-slate-100 ' >
             <div className='text-2xl font-semibold capitalize'>
                 <h1>Subscribe to our newsletter</h1>
             </div>

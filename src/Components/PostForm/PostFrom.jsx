@@ -16,6 +16,7 @@ export default function PostForm ({ post }) {
             slug: post?.$id || "",
             content: post?.content || "",
             status: post?.status || "active",
+            genre: post?.genre || "other"
         },
     });
 
@@ -73,6 +74,7 @@ export default function PostForm ({ post }) {
         return "";
     }, []);
     if (post) getUrl(post)
+
     React.useEffect(() => {
         const subscription = watch((value, { name }) => {
             if (name === "title") {
@@ -84,30 +86,27 @@ export default function PostForm ({ post }) {
     }, [watch, slugTransform, setValue]);
 
     return (
-        <form onSubmit={ handleSubmit(submit) } className="flex flex-wrap">
+        <form onSubmit={ handleSubmit(submit) } className="flex mb-10 flex-wrap">
             <div className="w-2/3 px-2">
                 <Input
                     label="Title :"
                     placeholder="Title"
-                    className="mb-4"
+                    className="mb-4 border w-80 "
                     { ...register("title", { required: true }) }
                 />
                 <Input
                     label="Slug :"
                     placeholder="Slug"
-                    className="mb-4"
+                    className="mb-4 border w-80 "
                     { ...register("slug", { required: true }) }
                     onInput={ (e) => {
                         setValue("slug", slugTransform(e.currentTarget.value), { shouldValidate: true });
                     } }
                 />
-                <RTE label="Content :" name="content" control={ control } defaultValue={ getValues("content") } />
-            </div>
-            <div className="w-1/3 px-2">
                 <Input
                     label="Featured Image :"
                     type="file"
-                    className="mb-4"
+                    className="mb-4 border w-80 "
                     accept="image/png, image/jpg, image/jpeg, image/gif,image/webp"
                     { ...register("image", { required: !post }) }
                 />
@@ -120,11 +119,21 @@ export default function PostForm ({ post }) {
                         />
                     </div>
                 ) }
+                <RTE label="Content :" name="content" control={ control } defaultValue={ getValues("content") } />
+            </div>
+            <div className="w-1/3 px-2">
+
                 <Select
                     options={ ["active", "inactive"] }
                     label="Status"
-                    className="mb-4"
+                    className="mb-4 "
                     { ...register("status", { required: true }) }
+                />
+                <Select
+                    options={ ["tech", "fashion", "travel", "science", "history", "horror", "lifeStyle", "Management", "Other"] }
+                    label="Genre"
+                    className="mb-4"
+                    { ...register("genre", { required: true }) }
                 />
                 <button type="submit" className={ `${post ? "bg-green-500" : "bg-blue-500"} text-white px-3 py-1 rounded-sm` }>
                     { post ? "Update" : "Submit" }

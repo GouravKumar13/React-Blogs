@@ -61,7 +61,7 @@ const SignIn = () => {
                 <hr className='w-full ' />
                 <h1 className="font-bold text-3xl text-neutral-700 ">Welcome!</h1>
                 < form onSubmit={ handleSubmit(authLogin) } className='flex flex-col items-center  w-[80%]'  >
-                    <div className="w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
+                    <div className=" w-full group flex flex-col border border-solid border-[#ddd] rounded mb-[20px] transition-[0.3s] focus-within:border-[#8c7569]
                     " >
                         <Input label="Email" type="email" placeholder=" Enter Email"
                             name="email"

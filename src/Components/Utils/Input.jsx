@@ -10,13 +10,13 @@ const Input = ({
 }, ref) => {
     const id = useId()
     return (
-        <div className='flex flex-col w-80  gap-1 justify-center '>
+        <div className=' space-x-3 '>
             { label &&
                 <label htmlFor={ id } className="group-focus-within:text[#8c7569] text-[16px] uppercase pl-[4px] font-semibold text-[#8c7569] transition-[0.3s]">{ label }</label>
             }
             <input
                 type={ type }
-                className={ `focus:outline-blue-300 rounded-sm outline-none border-none pl-[4px] text-sm ${className} ` }
+                className={ ` rounded-sm outline-none p-1 pl-1  text-sm ${className} ` }
                 id={ id }
                 { ...props }
                 ref={ ref } />

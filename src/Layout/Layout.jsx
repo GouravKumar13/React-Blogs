@@ -6,13 +6,15 @@ import { Outlet, createBrowserRouter } from 'react-router-dom'
 const Layout = () => {
 
     return (
-        <div className='max-w-screen-xl flex flex-col  min-h-[100vh] overflow-hidden mx-auto'>
-            <Header />
-            <Outlet />
+        <>
+            <div className='max-w-screen-xl  flex flex-col  min-h-[100vh] overflow-hidden mx-auto'>
+                <Header />
+                <Outlet />
 
+
+            </div>
             <Footer />
-
-        </div>
+        </>
     )
 }
 

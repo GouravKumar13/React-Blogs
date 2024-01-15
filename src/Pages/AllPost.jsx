@@ -5,7 +5,7 @@ import appwriteBlogService from '../appWrite/BlogsOperations'
 function AllPosts () {
     const [posts, setPosts] = useState([])
     useEffect(() => {
-        appwriteBlogService.getAllPosts([]).then((posts) => {
+        appwriteBlogService.getPost([]).then((posts) => {
             if (posts) {
                 setPosts(posts.documents)
             }

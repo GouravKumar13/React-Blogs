@@ -13,5 +13,6 @@ import AddPost from "../Pages/AddPost"
 import AllPosts from "../Pages/AllPost"
 import Post from "../Pages/Post"
 import EditPost from "../Pages/EditPost"
+import UserProfile from "../Pages/UserProfile";
 
-export { Header, Footer, MainContainer, SignIn, Signup, Input, Select, RTE, Home, AuthGurd, PostCard, AddPost, AllPosts, Post, EditPost }
+export { Header, Footer, MainContainer, SignIn, Signup, Input, Select, RTE, Home, AuthGurd, PostCard, AddPost, AllPosts, Post, EditPost, UserProfile }

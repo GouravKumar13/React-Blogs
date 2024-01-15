@@ -43,7 +43,7 @@ export default function Post () {
         }).then((result) => {
 
             if (result.isConfirmed) {
-                const data = appwriteBlogService.deletePost(post.$id).then((status) => {
+                appwriteBlogService.deletePost(post.$id).then((status) => {
                     if (status) {
                         appwriteBlogService.deleteFile(post.featuredImage)
 
@@ -72,21 +72,25 @@ export default function Post () {
 
 
     }
-
-
+    console.log(localStorage.getItem("avatar"))
     return post ? (
 
-        <div className="py-8 z-0">
-
-            <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
-                <img
-                    src={ url }
-                    alt={ post.title }
-                    className="rounded-xl object-contain drop-shadow-lg"
-                />
-
+        <div className="py-8 z-0 w-full flex flex-col items-center ">
+            <div className=" m-4 w-full ml-[50%]  ">
+                <div className="flex flex-col  relative space-y-2 ">
+                    <h1 className="text-2xl uppercase  font-semibold ">{ post.title }</h1>
+                    <div className="w-1/2 flex justify-between">
+                        <Link to="/userProfile">
+                            <div className="flex w-fit space-x-2 group">
+                                <img src={ localStorage.getItem("avatar") ? localStorage.getItem("avatar") : localStorage.getItem("defaultAvatar") } alt="" className="w-6 h-6 group-hover:scale-110 transition-all ease-in-out" />
+                                <p className="uppercase group-hover:text-black font-bold text-slate-600">{ userData.name }</p>
+                            </div>
+                        </Link>
+                        <span className="text-white bg-red-400 capitalize px-3 rounded-sm">{ post.genre }</span>
+                    </div>
+                </div>
                 { isAuthor && (
-                    <div className="absolute right-6 top-14 text-white">
+                    <div className="absolute my-4 text-white">
                         <Link to={ `/edit-post/${post.$id}` }>
                             <button className="mr-3 px-2 rounded bg-green-500">
                                 Edit
@@ -98,12 +102,22 @@ export default function Post () {
                     </div>
                 ) }
             </div>
-            <div className="w-full mb-6">
-                <h1 className="text-2xl uppercase text-neutral-950   font-semibold ">{ post.title }</h1>
+
+
+            <div className=" flex w-1/2    rounded-md m-10">
+                <img
+                    src={ url }
+                    alt={ post.title }
+                    className="rounded-md h-1/2 w-full shadow-lg   shadow-black"
+                />
+
+
             </div>
-            <div className="text-lg text-slate-800 ">
+
+            <div className=" w-1/2 text-slate-800 ">
                 { parse(post.content) }
             </div>
+
 
         </div>
     ) : null;

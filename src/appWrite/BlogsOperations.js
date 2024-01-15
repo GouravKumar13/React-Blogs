@@ -19,7 +19,7 @@ export class Service {
     }
 
     // create post
-    async createPost ({ title, slug, content, featuredImage, status, userId }) {
+    async createPost ({ title, slug, content, genre, featuredImage, status, userId }) {
         try {
             return await this.dataBases.createDocument(
                 config.appWriteDatabaseId,
@@ -31,6 +31,7 @@ export class Service {
                     featuredImage,
                     status,
                     userId,
+                    genre
 
                 }
             )
@@ -40,7 +41,7 @@ export class Service {
     }
 
     // Upload Post
-    async updatePost (slug, { title, content, featuredImage, status, }) {
+    async updatePost (slug, { title, content, genre, featuredImage, status, }) {
         try {
             return await this.dataBases.updateDocument(
                 config.appWriteDatabaseId,
@@ -51,6 +52,7 @@ export class Service {
                     content,
                     featuredImage,
                     status,
+                    genre,
 
                 })
 
