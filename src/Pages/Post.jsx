@@ -5,6 +5,8 @@ import parse from "html-react-parser";
 import { useSelector } from "react-redux";
 import Swal from "sweetalert2";
 
+
+
 export default function Post () {
     const [post, setPost] = useState(null);
     const [url, setUrl] = useState(null)
@@ -72,25 +74,24 @@ export default function Post () {
 
 
     }
-    console.log(localStorage.getItem("avatar"))
+
+
+
+
+
+
     return post ? (
 
-        <div className="py-8 z-0 w-full flex flex-col items-center ">
-            <div className=" m-4 w-full ml-[50%]  ">
-                <div className="flex flex-col  relative space-y-2 ">
-                    <h1 className="text-2xl uppercase  font-semibold ">{ post.title }</h1>
-                    <div className="w-1/2 flex justify-between">
-                        <Link to="/userProfile">
-                            <div className="flex w-fit space-x-2 group">
-                                <img src={ localStorage.getItem("avatar") ? localStorage.getItem("avatar") : localStorage.getItem("defaultAvatar") } alt="" className="w-6 h-6 group-hover:scale-110 transition-all ease-in-out" />
-                                <p className="uppercase group-hover:text-black font-bold text-slate-600">{ userData.name }</p>
-                            </div>
-                        </Link>
-                        <span className="text-white bg-red-400 capitalize px-3 rounded-sm">{ post.genre }</span>
-                    </div>
+        <div className="py-8 z-0 w-full flex flex-col ml-4  items-start md:items-center ">
+            <div className=" m-4 w-full ml-1   md:ml-[50%]">
+                <div className="flex  flex-col relative space-y-2 ">
+                    <h1 className=" text-xl md:text-2xl uppercase  font-semibold ">{ post.title }</h1>
+
+                    <span className=" text-white bg-red-400 w-fit capitalize px-3 rounded-sm">{ post.genre }</span>
+
                 </div>
                 { isAuthor && (
-                    <div className="absolute my-4 text-white">
+                    <div className="absolute  my-4 text-white">
                         <Link to={ `/edit-post/${post.$id}` }>
                             <button className="mr-3 px-2 rounded bg-green-500">
                                 Edit
@@ -114,7 +115,7 @@ export default function Post () {
 
             </div>
 
-            <div className=" w-1/2 text-slate-800 ">
+            <div className=" pr-10 md:pr-0 md:w-1/2 text-slate-800 ">
                 { parse(post.content) }
             </div>
 

@@ -5,6 +5,7 @@ import { Client, Account, ID, } from "appwrite"
 
 
 
+
 // this is a more suitable for larger applications or parts of applications where you need to manage complex state, handle multiple instances, and ensure modularity and maintainability.The appwrite approach code snippet(procedural approach) is suitable for smaller scripts or tasks where simplicity and immediacy of execution are more important than extensive organization and reusability.
 
 export class AuthService {
@@ -20,7 +21,9 @@ export class AuthService {
         this.account = new Account(this.client);
 
 
+
     }
+
 
     async createAccount ({ name, email, password }) {
         try {
